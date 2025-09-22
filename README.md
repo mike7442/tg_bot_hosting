@@ -7,7 +7,7 @@ bash
 git clone <ваш-репозиторий>
 cd my_TG_bots/CamBot
 2. Установка зависимостей
-bash
+bash 
 sudo apt update
 sudo apt install fswebcam python3 python3-pip python3-venv
 3. Создание виртуального окружения
