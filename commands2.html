@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Копирование элементов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .copy-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .copy-item:hover {
+            background-color: #e0e0e0;
+        }
+        .copy-item.copied {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Commands to easy make .server files</h1>
+    
+    <div id="array-container">
+        <!-- Элементы массива будут здесь -->
+    </div>
+
+    <div class="notification" id="notification">Скопировано!</div>
+
+    <script>
+        // Ваш массив данных
+        const myArray = [
+            "sudo systemctl restart",
+            "sudo systemctl start",
+            "sudo systemctl stop",
+            "sudo systemctl restart",
+            "sudo systemctl status",
+            "sudo systemctl enable",
+            "sudo systemctl disable",
+            "sudo nano",
+            "sudo systemctl daemon-reload",
+	    "sudo journalctl",
+            "source /home/mike7442/my_TG_bots/venv/bin/activate",
+            "python3 -m venv /home/mike7442/my_TG_bots/venv",
+            "python3 CamBot/main.py",
+            "pip install pyTelegramBotAPI",
+            "pip install opencv-python-headless",
+            "deactivate",
+            "sudo apt update && sudo apt install",
+        ];
+
+        // Функция для создания элементов
+        function createArrayElements() {
+            const container = document.getElementById('array-container');
+            
+            myArray.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'copy-item';
+                div.textContent = item;
+                div.setAttribute('data-value', item);
+                
+                div.addEventListener('click', function() {
+                    copyToClipboard(item);
+                    showNotification();
+                    
+                    // Подсветка скопированного элемента
+                    this.classList.add('copied');
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                    }, 1000);
+                });
+                
+                container.appendChild(div);
+            });
+        }
+
+        // Функция копирования в буфер обмена
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).catch(err => {
+                console.error('Ошибка копирования:', err);
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
+
+        // Показать уведомление
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', createArrayElements);
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+[Unit]
+Description=Telegram Bot Service
+After=network.target
+
+[Service]
+Type=simple
+User=mike7442
+Group=mike7442
+WorkingDirectory=/home/mike7442/my_TG_bots/CamBot
+ExecStart=/bin/bash -c "source /home/mike7442/my_TG_bots/venv/bin/activate && exec python /home/mike7442/my_TG_bots/CamBot/main.py"
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
