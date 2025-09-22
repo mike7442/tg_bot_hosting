@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 # Конфигурация
-BOT_TOKEN = "7950188859:AAGv3TEMPDfzc_oDXxGgSjTTmTvyd_HHSco"
+BOT_TOKEN = "здесь должени быть длиннющий буквенночисленный код от BotFather"
 bot = TeleBot(BOT_TOKEN)
 
 # НАСТРОЙКА ЯРКОСТИ ЗДЕСЬ (меняйте это значение)
@@ -106,4 +106,5 @@ def handle_other_messages(message):
 
 if __name__ == "__main__":
     print_time(f"Бот запущен с яркостью: {BRIGHTNESS}%")
+
     bot.infinity_polling()
